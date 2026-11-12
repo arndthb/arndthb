@@ -259,12 +259,12 @@ def chart(x,y,w,h):
 s=start(1000,790,title,desc)
 s+='<path d="M20 114V60Q20 20 60 20H171V46H81Q78 46 78 63V114Z" fill="#ff9966"/>'
 s+=rect(184,20,584,12,'#ff9966')+rect(778,20,202,12,'#cc99cc',6)
-s+=txt(105,74,'ARNDT BOHRENKÄMPER',36,'#ffcc99',weight='700')
-s+=txt(107,104,'PERSONAL TERMINAL  /  EXPLORATION & RESEARCH',16,'#cc99cc',spacing=1.4)
+s+=txt(105,96,'ARNDT BOHRENKÄMPER',46,'#ffcc99',weight='700')
+s+=txt(107,126,'PERSONAL TERMINAL  /  EXPLORATION & RESEARCH',18,'#cc99cc',spacing=1.4)
 s+=txt(978,68,'LCARS',20,'#cc99cc',anchor='end',weight='700')+txt(978,92,'47 • 1701-D',15,'#ff9966',anchor='end')
 for y,h,c,label in [(122,95,'#cc99cc','01'),(225,70,'#a38abd','02'),(303,141,'#ff9966','03'),(452,74,'#ffcc99','04'),(534,105,'#879ab9','05')]:
     s+=rect(20,y,58,h,c)+txt(70,y+h-11,label,14,'#15111a',anchor='end',weight='700')
-s+=txt(105,143,'U.S.S. ENTERPRISE',25,'#cc99cc',weight='700')+txt(105,169,'NCC-1701-D  /  GALAXY CLASS',16,'#ffcc99',spacing=1)
+s+=txt(105,166,'U.S.S. ENTERPRISE',29,'#cc99cc',weight='700')+txt(105,192,'NCC-1701-D  /  GALAXY CLASS',18,'#ffcc99',spacing=1)
 s+=txt(978,142,'STARFLEET EXPLORATORY VESSEL',14,'#a6b4cc',anchor='end')
 s+=txt(978,164,'VESSEL STATUS  /  NOMINAL',14,'#ff9966',anchor='end')
 # Sparse stars stay subordinate to the hull.
@@ -293,10 +293,10 @@ s+='</g></svg>'
 
 s=start(420,650,title,desc)
 s+='<path d="M12 97V39Q12 12 39 12H84V30H48Q34 30 34 44V97Z" fill="#ff9966"/>'+rect(96,12,312,7,'#cc99cc',3)
-s+=txt(48,53,'ARNDT',28,'#ffcc99',weight='700')+txt(48,80,'BOHRENKÄMPER',28,'#ffcc99',weight='700')
-s+=txt(48,106,'PERSONAL TERMINAL / LCARS 47',13,'#cc99cc',spacing=.6)
+s+=txt(48,72,'ARNDT',36,'#ffcc99',weight='700')+txt(48,108,'BOHRENKÄMPER',36,'#ffcc99',weight='700')
+s+=txt(48,136,'PERSONAL TERMINAL / LCARS 47',16,'#cc99cc',spacing=.6)
 s+=rect(12,105,22,124,'#cc99cc')+rect(12,237,22,110,'#ff9966')+rect(12,355,22,70,'#879ab9')
-s+=txt(48,147,'U.S.S. ENTERPRISE',22,'#cc99cc',weight='700')+txt(48,172,'NCC-1701-D / GALAXY CLASS',15,'#ffcc99')
+s+=txt(48,177,'U.S.S. ENTERPRISE',25,'#cc99cc',weight='700')+txt(48,202,'NCC-1701-D / GALAXY CLASS',17,'#ffcc99')
 s+='<g transform="translate(200 332) scale(.53)">'+ship+'</g>'
 s+=rect(48,426,360,5,'#cc99cc',2)
 s+=txt(48,462,'EXPLORATION SYSTEMS',18,'#ff9966',weight='700')

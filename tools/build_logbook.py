@@ -25,7 +25,7 @@ SECTIONS=[
  ('p',"My route hasn't followed a standard flight plan: entrepreneurship, leadership and IT consulting."),
  ('p','The best discoveries often begin with a simple question: Why does it work like that?'),
  ('p','Current interests: artificial intelligence, cybersecurity, Linux and connected systems.')]},
- {'title':'MISSION LOG','deck':'AQVIONIS / SECURITY RESEARCH','colour':LAVENDER,'meta':['CLASSIFICATION: EXPERIMENTAL RESEARCH','STATUS: IN PROGRESS'],
+ {'title':'MISSION LOG','deck':'AQVIONIS / SECURITY RESEARCH','colour':LAVENDER,'meta':['CLASSIFICATION: EXPERIMENTAL RESEARCH','STATUS: IN PROGRESS','ACCESS: PRIVATE RESEARCH'],
  'entries':[
  ('feature','AQVIONIS'),
  ('p','Mission objective: explore AI-assisted detection of suspicious behaviour in infrastructure.'),
@@ -150,12 +150,12 @@ def link(mobile=False):
     w=420 if mobile else 1000;h=128 if mobile else 84
     x=48 if mobile else 105;rx=12 if mobile else 20;rw=22 if mobile else 58
     right=w-(18 if mobile else 20)
-    title='Open AQVIONIS mission file on GitHub — research access required'
-    body=f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="link-title link-description">\n<title id="link-title">{title}</title>\n<desc id="link-description">Access the private AQVIONIS research repository. Repository access is required. Experimental AI-assisted security research.</desc>\n<rect width="{w}" height="{h}" fill="#000000"/>\n<rect x="{rx}" y="0" width="{rw}" height="{h-18}" fill="{ORANGE}"/>\n<path d="M{x} 0H{right-26}Q{right} 0 {right} 26V{h-18}H{x}Z" fill="{ORANGE}"/>\n<g font-family="Arial, Helvetica, sans-serif" fill="#000000" font-weight="bold">\n'
+    title='Open M3 public code on GitHub'
+    body=f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="link-title link-description">\n<title id="link-title">{title}</title>\n<desc id="link-description">Open the public M3 code repository on GitHub.</desc>\n<rect width="{w}" height="{h}" fill="#000000"/>\n<rect x="{rx}" y="0" width="{rw}" height="{h-18}" fill="{ORANGE}"/>\n<path d="M{x} 0H{right-26}Q{right} 0 {right} 26V{h-18}H{x}Z" fill="{ORANGE}"/>\n<g font-family="Arial, Helvetica, sans-serif" fill="#000000" font-weight="bold">\n'
     if mobile:
-        body+=f'<text x="{x+15}" y="29" font-size="15">OPEN MISSION FILE</text>\n<text x="{x+15}" y="60" font-size="25">AQVIONIS</text>\n<text x="{x+15}" y="93" font-size="14">PRIVATE RESEARCH REPOSITORY</text>\n<path d="M{right-49} 40h26m-11-11 11 11-11 11" fill="none" stroke="#000000" stroke-width="3"/>\n'
+        body+=f'<text x="{x+15}" y="29" font-size="15">OPEN PUBLIC CODE</text>\n<text x="{x+15}" y="60" font-size="25">M3</text>\n<text x="{x+15}" y="93" font-size="14">PUBLIC REPOSITORY</text>\n<path d="M{right-49} 40h26m-11-11 11 11-11 11" fill="none" stroke="#000000" stroke-width="3"/>\n'
     else:
-        body+=f'<text x="{x+22}" y="43" font-size="24">OPEN MISSION FILE / AQVIONIS</text>\n<text x="{right-68}" y="41" font-size="15" text-anchor="end">PRIVATE RESEARCH REPOSITORY</text>\n<path d="M{right-48} 33h26m-11-11 11 11-11 11" fill="none" stroke="#000000" stroke-width="3"/>\n'
+        body+=f'<text x="{x+22}" y="43" font-size="24">OPEN PUBLIC CODE / M3</text>\n<text x="{right-68}" y="41" font-size="15" text-anchor="end">PUBLIC REPOSITORY</text>\n<path d="M{right-48} 33h26m-11-11 11 11-11 11" fill="none" stroke="#000000" stroke-width="3"/>\n'
     body+='</g>\n</svg>\n'
     (ROOT/('lcars-aqvionis-link-mobile.svg' if mobile else 'lcars-aqvionis-link.svg')).write_text(body)
 

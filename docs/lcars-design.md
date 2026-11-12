@@ -17,7 +17,7 @@ Black backgrounds, orange and lavender rails, rounded panel ends and consistent 
 
 SVG titles and descriptions provide meaningful image alternatives. Narrow-layout assets give the log content room to breathe on smaller screens. All display resources live in this repository; the published profile requires no JavaScript or runtime dependencies.
 
-Starship sensor, navigation and propulsion readings are fictional console scenery. They are not measured project statistics. No invented research outcomes or project performance metrics are presented. AQVIONIS is private; its mission link requires an account with access to the repository.
+Starship sensor, navigation and propulsion readings are fictional console scenery. They are not measured project statistics. No invented research outcomes or project performance metrics are presented. AQVIONIS is private and remains a research mission in the log. The public project button links to the M3 repository.
 
 ## Regeneration
 
@@ -26,6 +26,9 @@ From the repository root, run:
 ```sh
 python3 tools/build_starship.py
 python3 tools/build_logbook.py
+swift tools/outline_lcars_type.swift
 ```
 
-Both generators use the Python standard library only. Keep the generated SVGs alongside the sources, inspect wide and narrow layouts after changing copy or geometry, and check the rendered GitHub profile before publishing subsequent revisions.
+The content and illustration generators use the Python standard library only. The optional final lettering pass uses macOS CoreText and its system DIN Condensed Bold font, compressed slightly to suit the terminal. It renders technical captions as paths; no font file is distributed or required by the published profile. Personal prose retains a readable sans serif. Keep the generated SVGs alongside the sources, inspect wide and narrow layouts after changing copy or geometry, and check the rendered GitHub profile before publishing subsequent revisions.
+
+The README pins image URLs to a verified artwork commit. This prevents GitHub’s raw-image cache from mixing old and new displays. After regenerating artwork, commit it first, update the image commit in the README, and check the public rendering.
