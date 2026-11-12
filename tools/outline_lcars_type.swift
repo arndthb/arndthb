@@ -18,9 +18,11 @@ func fmt(_ x: CGFloat) -> String {
     return s.replacingOccurrences(of: #"\.?0+$"#, with: "", options: .regularExpression)
 }
 var total=0
-for url in (try! fm.contentsOfDirectory(at: assets, includingPropertiesForKeys: nil)).filter({ url in
+let artwork = (try! fm.contentsOfDirectory(at: assets, includingPropertiesForKeys: nil)).filter({ url in
     url.pathExtension == "svg" && ["lcars-starship", "lcars-logbook", "lcars-aqvionis-link"].contains { url.lastPathComponent.hasPrefix($0) }
-}) {
+})
+let heading=root.appendingPathComponent("docs/viewer-heading.svg")
+for url in artwork + (fm.fileExists(atPath:heading.path) ? [heading] : []) {
     var svg=try! String(contentsOf: url, encoding: .utf8)
     let matches=textRE.matches(in: svg, range: NSRange(svg.startIndex..., in: svg))
     var count=0

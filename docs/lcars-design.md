@@ -38,3 +38,7 @@ The README pins image URLs to a verified artwork commit. This prevents GitHub’
 Seven small status beacons pulse slowly across the craft, propulsion, sensor and navigation displays using SVG CSS animation. Their cycle is 3.8 seconds. A visible star field sits behind the craft in both layouts, with a few stars twinkling over 7.2 seconds. No JavaScript is used. A `prefers-reduced-motion: reduce` media query keeps all beacons and stars steady. The entire display remains readable as a static image.
 
 The console draws inspiration from LCARS. The independent shuttle design is not a legal clearance of the overall presentation. German copyright law distinguishes protected creative work and adaptations, including the need for sufficient distance from another work; see [UrhG section 2](https://www.gesetze-im-internet.de/urhg/__2.html) and [UrhG section 23](https://www.gesetze-im-internet.de/urhg/__23.html).
+
+## Interactive inspection
+
+The profile image links to the GitHub Pages inspection view. The model data is exported from the same procedural geometry before SVG view culling. The inspection view adds the otherwise unseen port-side details and rear hatch. A dependency-free Canvas renderer projects and shades the three-dimensional surfaces. Pointer capture provides drag rotation; the wheel and two-pointer pinch adjust distance. Keyboard arrows, plus/minus and Home provide equivalent controls. Motion preferences stop automatic rotation and status animations. All application code, model data and display assets are stored in this repository.

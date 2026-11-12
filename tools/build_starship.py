@@ -4,9 +4,14 @@ from math import sin, cos, pi, sqrt
 from html import escape
 import random
 import re
+import json
 
 ROOT=Path(__file__).resolve().parents[1]
 faces=[]
+mesh=[]
+mesh_lines=[]
+mesh_beacons=[]
+mesh_labels=[]
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def sub(a,b): return tuple(x-y for x,y in zip(a,b))
 def mul(a,k): return tuple(x*k for x in a)
@@ -24,6 +29,7 @@ def path(points,close=True):
     q=[proj(p) for p in points]
     return 'M'+' '.join(n(c) for c in q[0])+''.join('L'+' '.join(n(c) for c in p) for p in q[1:])+('Z' if close else '')
 def face(points,base=(135,151,161),normal=None,tint=0,colour=None,stroke=None):
+    mesh.append({"p":points,"c":colour or "#"+"".join(f"{min(255,max(0,round(c+tint))):02x}" for c in base),"n":normal or unit(cross(sub(points[1],points[0]),sub(points[2],points[0]))),"kind":"shell"})
     if normal is not None and dot(normal,V)<-.01:return
     if colour is None:
         norm=unit(normal or cross(sub(points[1],points[0]),sub(points[2],points[0])))
@@ -35,8 +41,10 @@ def face(points,base=(135,151,161),normal=None,tint=0,colour=None,stroke=None):
     markup+='/>'
     faces.append((sum(dot(p,V) for p in points)/len(points),markup))
 def line(points,colour,width=.6,depth=.3):
+    mesh_lines.append({"p":points,"c":colour,"w":width,"bias":depth})
     faces.append((sum(dot(p,V) for p in points)/len(points)+depth,f'<path d="{path(points,False)}" fill="none" stroke="{colour}" stroke-width="{width}" stroke-linecap="round"/>'))
 def decal(points,colour,depth=.4):
+    mesh.append({"p":points,"c":colour,"kind":"decal","bias":depth})
     faces.append((sum(dot(p,V) for p in points)/len(points)+depth,f'<path d="{path(points)}" fill="{colour}"/>'))
 def solid(points,indices,base=(146,161,171)):
     for ix in indices:face([points[i] for i in ix],base)
@@ -196,6 +204,7 @@ for y in [92,117,141]:
     line([p,add(p,(0,2.5,0))],'#283b49',2.3,24)
     line([add(p,(.5,0,.8)),add(p,(.5,2.5,.8))],'#e1c391',.65,25)
 def stencil(text,p,size,along=(1,0,0),down=(0,1,0),colour='#405669'):
+    mesh_labels.append({"text":text,"p":p,"size":size,"a":along,"d":down,"c":colour})
     x,y=proj(p);a,b=proj(along);c,d=proj(down)
     label=f'<text transform="matrix({n(a)} {n(b)} {n(c)} {n(d)} {n(x)} {n(y)})" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="{size}" font-weight="700" letter-spacing="1" fill="{colour}">{escape(text)}</text>'
     faces.append((dot(p,V)+45,label))
@@ -204,6 +213,7 @@ stencil('AR04',hull_at(-96,1.06,.28),7,(0,-1,0),(0,0,-1),'#d4e1e5')
 
 # Tiny emissive approach beacons. The animation affects only these points.
 for p,c,delay in [((43,130,-1),'#8ce1ce','0s'),((-43,130,-1),'#e4a778','1.6s'),((111,18,-9),'#94d9f5','.8s'),((-111,18,-9),'#94d9f5','2.4s')]:
+    mesh_beacons.append({"p":p,"c":c,"delay":delay})
     x,y=proj(p)
     faces.append((dot(p,V)+24,f'<g class="status-beacon" style="animation-delay:{delay}"><circle cx="{n(x)}" cy="{n(y)}" r="2.4" fill="{c}" opacity=".2"/><circle cx="{n(x)}" cy="{n(y)}" r=".95" fill="{c}"/></g>'))
 
@@ -277,6 +287,7 @@ s+='<g transform="translate(530 397) scale(1.8)">'+ship+'</g>'
 # Fine callout tracks stay outside the main silhouette.
 s+='<g fill="none" stroke="#746582" stroke-width=".8"><path d="M188 285H254L293 321"/><path d="M924 249H843L811 280"/><path d="M180 550H309L377 507"/></g>'
 s+=txt(118,276,'PRIMARY HULL',11,'#b3a0c6',spacing=1)+txt(922,240,'PROPULSION PODS',11,'#b3a0c6',anchor='end',spacing=1)+txt(118,567,'FORWARD SENSOR ARRAY',11,'#b3a0c6',spacing=.8)
+s+=txt(978,599,'OPEN 3D INSPECTION',18,'#ffcc99',anchor='end')
 s+=rect(105,613,875,7,'#cc99cc',3)
 # Three subordinate technical views.
 s+=txt(105,649,'01  LONG-RANGE SENSORS',16,'#ff9966',weight='700')
@@ -304,6 +315,7 @@ s+=rect(12,105,22,124,'#cc99cc')+rect(12,237,22,110,'#ff9966')+rect(12,355,22,70
 s+=txt(48,177,'SURVEY SHUTTLE',25,'#cc99cc',weight='700')+txt(48,202,'AR04 / RESEARCH CRAFT',17,'#ffcc99')
 s+=starfield(48,212,357,208,65,104)
 s+='<g transform="translate(205 315) scale(.83)">'+ship+'</g>'
+s+=txt(406,417,'OPEN 3D VIEW',16,'#ffcc99',anchor='end')
 s+=rect(48,426,360,5,'#cc99cc',2)
 s+=txt(48,462,'EXPLORATION SYSTEMS',18,'#ff9966',weight='700')
 for y,l,v in [(495,'SENSORS','ONLINE'),(523,'DRIVE FIELD','STABLE'),(551,'NAVIGATION','ALIGNED')]:s+=txt(48,y,l,16,'#b6bdd0')+txt(406,y,v,16,'#ffcc99',anchor='end')
@@ -316,3 +328,28 @@ s+='<path d="M12 433V610Q12 638 34 638V433Z" fill="#cc99cc"/>'+rect(48,634,360,4
 s+='</g></svg>'
 (ROOT/'assets/lcars-starship-mobile.svg').write_text(s)
 print(f'Generated {len(faces)} vector surfaces and details; desktop {len((ROOT/"assets/lcars-starship.svg").read_bytes()):,} bytes.')
+
+# Both outboard faces of each drive housing are visible when orbiting.
+for item in list(mesh):
+    if item.get('kind')=='decal' and item['c'] in ['url(#driveGlass)','#243f53','#bc6b43']:
+        cx=106 if sum(p[0] for p in item['p'])>0 else -106
+        mesh.append({**item,'p':[(2*cx-p[0],p[1],p[2]) for p in item['p']]})
+for item in list(mesh_lines):
+    if item['c'] in ['#b8eeff','#a5c9d9']:
+        cx=106 if sum(p[0] for p in item['p'])>0 else -106
+        mesh_lines.append({**item,'p':[(2*cx-p[0],p[1],p[2]) for p in item['p']]})
+
+# Complete the unseen port side and rear for the interactive inspection view.
+for item in list(mesh):
+    if item.get('kind')=='decal' and (item['c']=='#718a9b' or (item['c']=='url(#cockpitGlass)' and min(p[0] for p in item['p'])>30)):
+        mesh.append({**item,'p':[(-p[0],p[1],p[2]) for p in item['p']]})
+for label in list(mesh_labels):
+    if label['p'][0]>60:mesh_labels.append({**label,'p':(-label['p'][0],label['p'][1],label['p'][2]),'a':tuple(-v for v in label['a'])})
+mesh.append({'p':[(-25,-151,0),(25,-151,0),(25,-151,45),(-25,-151,45)],'c':'#8f9e9e','kind':'decal','bias':3})
+mesh_lines.append({'p':[(-25,-152,0),(25,-152,0),(25,-152,45),(-25,-152,45),(-25,-152,0)],'c':'#d5dedc','w':.7,'bias':4})
+mesh_lines.append({'p':[(-5,-152.5,22),(5,-152.5,22)],'c':'#c8d6da','w':1.4,'bias':5})
+
+(ROOT/"docs").mkdir(exist_ok=True)
+(ROOT/"docs/shuttle.json").write_text(json.dumps({"faces":mesh,"lines":mesh_lines,"beacons":mesh_beacons,"labels":mesh_labels},separators=(",",":")))
+
+(ROOT/"docs/viewer-heading.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="420" height="62" viewBox="0 0 420 62" role="img" aria-label="Shuttle inspection"><text x="0" y="48" font-size="56" fill="#ffd3a5">SHUTTLE INSPECTION</text></svg>')
