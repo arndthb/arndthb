@@ -53,7 +53,7 @@ def loft(rings,steps=48,base=(151,164,171),axis='y'):
             # ring order runs from stern towards bow
             face(pts,base,normal=norm,tint=((i//3+j//2)%3-1)*1.7)
 
-# Independent AR04 survey shuttle. No franchise spacecraft geometry or insignia.
+# AR04 survey shuttle: original vector geometry with classic TNG proportions.
 def angular_loft(rings,base=(164,175,179),soft=False):
     section=[(1,.48),(.70,1),(-.70,1),(-1,.48),(-1,-.48),(-.70,-1),(.70,-1),(1,-.48)]
     if soft:
@@ -66,14 +66,14 @@ def angular_loft(rings,base=(164,175,179),soft=False):
             material=base
             if soft:
                 height=(section[i][1]+section[k][1])/2
-                material=(185,197,203) if height>.45 else ((141,162,176) if height>-.3 else (99,123,140))
+                material=(205,208,202) if height>.45 else ((166,177,183) if height>-.3 else (105,126,141))
             face(pts,material,normal=unit(cross(sub(pts[1],pts[0]),sub(pts[3],pts[0]))),tint=0 if soft else (j%3-1))
     face(list(reversed(rr[0])),base,normal=(0,-1,0))
     face(rr[-1],base,normal=(0,1,0))
     return rr
 
 # Faceted lifting cabin, an asymmetrical roof profile and a low instrument nose.
-body=[(-170,48,27,5,0),(-148,72,39,9,0),(-105,83,44,13,0),(-42,85,47,15,0),(28,80,47,16,0),(85,70,40,12,0),(126,57,30,2,0),(159,41,19,-8,0),(176,27,10,-12,0)]
+body=[(-150,62,30,15,0),(-132,76,39,17,0),(-100,80,43,18,0),(-40,82,45,18,0),(35,82,45,18,0),(70,80,43,18,0),(102,75,34,11,0),(128,68,25,0,0),(142,66,20,-5,0),(147,63,18,-6,0)]
 def smooth_stations(rings):
     result=[]
     for i in range(len(rings)-1):
@@ -95,15 +95,18 @@ def hull_at(y,a=1,b=1):
 # Short swept shoulders carry the propulsion pods. Thin leading edges make
 # these actual wings rather than detached decorative cylinders.
 for side in [-1,1]:
-    pp=[(side*60,-126,-9),(side*74,-18,-12),(side*130,8,-6),(side*138,-151,-9),
-        (side*60,-126,-2),(side*74,-18,-5),(side*130,8,1),(side*138,-151,-2)]
+    pp=[(side*78,-110,-31),(side*80,72,-31),(side*103,72,-27),(side*105,-124,-27),
+        (side*78,-110,-27),(side*80,72,-27),(side*103,72,-23),(side*105,-124,-23)]
     solid(pp,[(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)],(143,158,166))
-    line([(side*80,-109,0),(side*120,-128,0)],'#bfd0d6',.8,3)
-    line([(side*82,-54,-1),(side*119,-57,1)],'#536b7a',1,3)
+    for yy in [-95,48]:
+        strut=[(side*65,yy-7,-25),(side*108,yy-7,-25),(side*108,yy+7,-25),(side*65,yy+7,-25),
+               (side*65,yy-7,-16),(side*108,yy-7,-16),(side*108,yy+7,-16),(side*65,yy+7,-16)]
+        solid(strut,[(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)],(155,173,182))
+        line([(side*80,yy,-15.5),(side*105,yy,-15.5)],'#b5c8d1',.65,4)
     # Compact hexagonal engine fairings; no red franchise-style collector caps.
-    x=side*130
-    rings=[(-184,6,7,-9,x),(-166,18,16,-7,x),(-116,22,18,-5,x),(-48,22,18,-3,x),(19,18,15,-1,x),(63,12,11,0,x),(79,3,5,0,x)]
-    angular_loft(rings,(144,164,176))
+    x=side*106
+    rings=[(-180,4,5,-25,x),(-168,13,10,-25,x),(-127,17,13,-24,x),(-55,17,13,-24,x),(25,16,12,-23,x),(90,15,11,-23,x),(130,12,10,-23,x),(145,5,7,-23,x)]
+    angular_loft(rings,(172,183,186))
     def pod_at(y,a,b):
         aa,bb=next((aa,bb) for aa,bb in zip(rings,rings[1:]) if aa[0]<=y<=bb[0])
         t=(y-aa[0])/(bb[0]-aa[0]);rx=aa[1]+(bb[1]-aa[1])*t;rz=aa[2]+(bb[2]-aa[2])*t;z=aa[3]+(bb[3]-aa[3])*t
@@ -125,14 +128,11 @@ for side in [-1,1]:
     # Forward manoeuvring jets and amber approach lights.
     p=pod_at(63,.72,.55)
     line([p,add(p,(0,7,-2))],'#e6b36e',1.9,6)
+    cap=[(x+5.4*cos(2*pi*i/32),146,-23+6.9*sin(2*pi*i/32)) for i in range(32)]
+    decal(cap,'url(#collectorGlass)',25)
 
-# A small swept stabiliser and a roof-mounted environmental sensor mast.
-fin=[(-3,-160,31),(-3,-148,91),(-3,-133,86),(-3,-100,56),(3,-160,31),(3,-148,91),(3,-133,86),(3,-100,56)]
-solid(fin,[(0,1,2,3),(4,7,6,5),(0,4,5,1),(1,5,6,2),(2,6,7,3),(0,3,7,4)],(167,183,192))
-line([(3.3,-148,91),(3.3,-133,86)],'#d5e2e7',.9,5)
-line([(3.2,-145,78),(3.2,-133,67)],'#de9f65',1.4,5)
-line([(0,-53,64),(0,-53,80)],'#a6bac7',1.5,3)
-line([(-7,-53,80),(7,-53,80)],'#9ec9d9',1.5,3)
+# A low roof equipment blister keeps the classic shuttle silhouette finless.
+angular_loft([(-132,12,2,58,0),(-118,20,4,61,0),(-85,20,4,62,0),(-72,10,2,62,0)],(184,192,192))
 
 # Roof plating follows the real hull stations. Alternating insets add scale.
 for y in [-133,-111,-82,-55,-28,0]:
@@ -150,24 +150,22 @@ for side in [-1,1]:
         line([points[0],points[1]],'#c0ced2',.6,6)
 
 # A broad, three-pane cockpit on the sloping upper bow, with a visible frame.
-glass=[(-51,35,65),(51,35,65),(39,131,34),(-39,131,34)]
-# Three trapezoidal panes share the same physical plane.
-for lo,hi in [(-.94,-.35),(-.29,.29),(.35,.94)]:
-    surround=[(lo*51,35,65),(hi*51,35,65),(hi*39,131,34),(lo*39,131,34)]
-    decal(surround,'#1c303d',60)
-    pts=[(lo*51,39,64.2),(hi*51,39,64.2),(hi*39,126,36.6),(lo*39,126,36.6)]
-    decal(pts,'url(#cockpitGlass)',62)
-    # A crisp reflection gives the glazing depth without raster shine.
-    decal([(lo*51,40,64.4),(hi*51,40,64.4),(hi*44,87,49.4),(lo*44,87,49.4)],'url(#glassReflection)',90)
-    line([pts[0],pts[1]],'#c4dbe4',.75,66)
-    line([pts[2],pts[3]],'#507588',.55,66)
-for a,b in zip(glass,glass[1:]+glass[:1]):line([a,b],'#819eaf',1.8,66)
-line([glass[0],glass[1]],'#e0e8e8',.7,68)
+glass=[(-59,77,61),(59,77,61),(54,112,38),(-54,112,38)]
+# A broad paired windshield, close to the visual language of TNG shuttles.
+for lo,hi in [(-.96,-.035),(.035,.96)]:
+    surround=[(lo*59,77,61),(hi*59,77,61),(hi*54,112,38),(lo*54,112,38)]
+    decal(surround,'#152734',60)
+    pts=[(lo*57,79,59.8),(hi*57,79,59.8),(hi*52,110,39.5),(lo*52,110,39.5)]
+    decal(pts,'url(#cockpitGlass)',63)
+    decal([(lo*57,80,59.4),(hi*57,80,59.4),(hi*55,93,50.8),(lo*55,93,50.8)],'url(#glassReflection)',90)
+    line([pts[0],pts[1]],'#c9dbe1',.65,68)
+for a,b in zip(glass,glass[1:]+glass[:1]):line([a,b],'#758e9d',1.45,68)
+line([glass[0],glass[1]],'#e2e8e5',.65,70)
 
 # Side glazing, access hatch and service panels on the visible starboard flank.
-side_glass=[hull_at(y,1.025,b) for y,b in [(-30,.40),(44,.40),(44,.06),(-30,.06)]]
+side_glass=[hull_at(y,.973,b) for y,b in [(49,.72),(101,.72),(101,.42),(49,.42)]]
 decal(side_glass,'url(#cockpitGlass)',32)
-for y in [-10,17]:line([hull_at(y,1.04,.07),hull_at(y,1.04,.40)],'#b6ccd6',1,34)
+for y in [73]:line([hull_at(y,.985,.43),hull_at(y,.985,.71)],'#b6ccd6',1,34)
 door=[hull_at(y,1.025,b) for y,b in [(-120,.44),(-63,.44),(-63,-.49),(-120,-.49)]]
 decal(door,'#718a9b',32)
 for a,b in zip(door,door[1:]+door[:1]):line([a,b],'#ccd8dc',.7,34)
@@ -182,14 +180,18 @@ for j in range(6):
     line([hull_at(y,1.04,-.63),hull_at(y+4,1.04,-.63)],'#dbd6be',.9,10)
 
 # Independent forward sensor assembly, recessed below the cockpit.
-sensor=[(-25,176,-6),(25,176,-6),(22,178,-18),(-22,178,-18)]
-decal(sensor,'#263c4e',15)
-for x in [-17,-7,7,17]:line([(x,179,-8),(x,180,-15)],'#74cce3',1.8,17)
-line([(-18,170,0),(18,170,0)],'#d2d9d2',.7,8)
+sensor=[(-42,149,4),(42,149,4),(39,150,-12),(-39,150,-12)]
+decal(sensor,'#526a79',28)
+for x in [-28,-10,10,28]:line([(x,151,0),(x,152,-6)],'#79bdd0',1.1,30)
+line([(-48,149,10),(48,149,10)],'#d7dfda',.7,31)
+# Restrained red and charcoal pinstripes recall the familiar shuttle livery.
+for side in [-1,1]:
+    line([hull_at(y,side*1.03,-.15) for y in range(-125,121,7)],'#9d514b',1.55,22)
+    line([hull_at(y,side*1.03,-.22) for y in range(-125,121,7)],'#42525e',.75,22)
 
 # Instrument lenses, thrusters and restrained identification stencils.
 for x in [-10,0,10]:
-    p=(x,180,-11);xx,yy=proj(p)
+    p=(x,152,-4);xx,yy=proj(p)
     faces.append((dot(p,V)+21,f'<circle cx="{n(xx)}" cy="{n(yy)}" r="1.2" fill="#b4e8f4"/>'))
 for y in [92,117,141]:
     p=hull_at(y,1.05,-.05)
@@ -203,7 +205,7 @@ stencil('AR04',(0,-91,63),10)
 stencil('AR04',hull_at(-96,1.06,.28),7,(0,-1,0),(0,0,-1),'#d4e1e5')
 
 # Tiny emissive approach beacons. The animation affects only these points.
-for p,c,delay in [((53,120,34),'#8ce1ce','0s'),((-53,120,34),'#e4a778','1.6s'),((136,58,11),'#94d9f5','.8s'),((-136,58,11),'#94d9f5','2.4s')]:
+for p,c,delay in [((64,134,8),'#8ce1ce','0s'),((-64,134,8),'#e4a778','1.6s'),((111,120,-12),'#94d9f5','.8s'),((-111,120,-12),'#94d9f5','2.4s')]:
     x,y=proj(p)
     faces.append((dot(p,V)+24,f'<g class="status-beacon" style="animation-delay:{delay}"><circle cx="{n(x)}" cy="{n(y)}" r="2.4" fill="{c}" opacity=".2"/><circle cx="{n(x)}" cy="{n(y)}" r=".95" fill="{c}"/></g>'))
 
@@ -218,7 +220,7 @@ def paint(m):
 ship=re.sub(r'fill="(#[a-f0-9]+)" stroke="\1" stroke-width="\.22" stroke-linejoin="round"',paint,ship)
 styles=''.join('.'+cls+'{fill:'+c+';stroke:'+c+'}' for c,cls in paints.items())
 styles+='@keyframes statusPulse{0%,55%,100%{opacity:.32}65%,82%{opacity:1}}@keyframes starTwinkle{0%,100%{opacity:.35}50%{opacity:1}}.status-beacon{animation:statusPulse 3.8s ease-in-out infinite}.star-twinkle{animation:starTwinkle 7.2s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.status-beacon,.star-twinkle{animation:none;opacity:1}}'
-defs='<defs><linearGradient id="cockpitGlass" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#74aec6"/><stop offset=".33" stop-color="#305d78"/><stop offset="1" stop-color="#0b2032"/></linearGradient><linearGradient id="glassReflection" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#e0f1f8" stop-opacity=".65"/><stop offset=".4" stop-color="#a0c9dc" stop-opacity=".22"/><stop offset="1" stop-color="#71a1c4" stop-opacity="0"/></linearGradient><linearGradient id="driveGlass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#abebff"/><stop offset=".35" stop-color="#4faee0"/><stop offset="1" stop-color="#1b5f9d"/></linearGradient></defs>'
+defs='<defs><radialGradient id="collectorGlass" cx=".35" cy=".3" r=".8"><stop stop-color="#ffd59e"/><stop offset=".45" stop-color="#db754f"/><stop offset="1" stop-color="#612e2b"/></radialGradient><linearGradient id="cockpitGlass" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#74aec6"/><stop offset=".33" stop-color="#305d78"/><stop offset="1" stop-color="#0b2032"/></linearGradient><linearGradient id="glassReflection" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#e0f1f8" stop-opacity=".65"/><stop offset=".4" stop-color="#a0c9dc" stop-opacity=".22"/><stop offset="1" stop-color="#71a1c4" stop-opacity="0"/></linearGradient><linearGradient id="driveGlass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#abebff"/><stop offset=".35" stop-color="#4faee0"/><stop offset="1" stop-color="#1b5f9d"/></linearGradient></defs>'
 ship=defs+'<style>'+styles+'</style><g stroke-width=".22" stroke-linejoin="round">'+ship+'</g>'
 
 def txt(x,y,text,size=16,fill='#cc99cc',anchor=None,weight=None,spacing=None):
@@ -231,7 +233,7 @@ def rect(x,y,w,h,fill,rx=0):return f'<rect x="{x}" y="{y}" width="{w}" height="{
 def start(w,h,title,desc):
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="title desc"><title id="title">{escape(title)}</title><desc id="desc">{escape(desc)}</desc><rect width="{w}" height="{h}" fill="#000"/><g font-family="Arial,Helvetica,sans-serif">'
 title='Arndt Bohrenkämper: personal LCARS terminal'
-desc='An independently designed fictional survey shuttle in a detailed three-quarter view. A sculpted metallic cabin with rounded shoulders, reflective three-pane cockpit glazing, recessed blue drive channels, service hatches and a forward sensor array sit within a dark exploration console. A visible star field surrounds the craft. Small status lights pulse slowly across several systems, with a few stars twinkling. Reduced-motion preferences disable all animation.'
+desc='An original vector interpretation of a research shuttle with classic TNG-inspired proportions, shown in a detailed three-quarter view. A sculpted metallic cabin with rounded shoulders, a broad paired cockpit windshield, recessed blue drive channels, service hatches and a forward sensor array sit within a dark exploration console. A visible star field surrounds the craft. Small status lights pulse slowly across several systems, with a few stars twinkling. Reduced-motion preferences disable all animation.'
 
 def chart(x,y,w,h):
     random.seed(47)
@@ -273,7 +275,7 @@ s+=txt(978,164,'VESSEL STATUS  /  NOMINAL',14,'#ff9966',anchor='end')
 # Visible stars remain behind the craft, with only a few slowly twinkling.
 s+=starfield(111,209,863,387,130,47)
 s+='<path d="M112 201H172M112 201V229M978 201H918M978 201V229M112 582H172M112 582V554M978 582H918M978 582V554" fill="none" stroke="#465267" stroke-width="1"/>'
-s+='<g transform="translate(530 407) scale(1.7)">'+ship+'</g>'
+s+='<g transform="translate(530 397) scale(1.8)">'+ship+'</g>'
 # Fine callout tracks stay outside the main silhouette.
 s+='<g fill="none" stroke="#746582" stroke-width=".8"><path d="M188 285H254L293 321"/><path d="M924 249H843L811 280"/><path d="M180 550H309L377 507"/></g>'
 s+=txt(118,276,'PRIMARY HULL',11,'#b3a0c6',spacing=1)+txt(922,240,'PROPULSION PODS',11,'#b3a0c6',anchor='end',spacing=1)+txt(118,567,'FORWARD SENSOR ARRAY',11,'#b3a0c6',spacing=.8)
@@ -303,7 +305,7 @@ s+=txt(48,136,'PERSONAL TERMINAL / LCARS 47',16,'#cc99cc',spacing=.6)
 s+=rect(12,105,22,124,'#cc99cc')+rect(12,237,22,110,'#ff9966')+rect(12,355,22,70,'#879ab9')
 s+=txt(48,177,'SURVEY SHUTTLE',25,'#cc99cc',weight='700')+txt(48,202,'AR04 / RESEARCH CRAFT',17,'#ffcc99')
 s+=starfield(48,212,357,208,65,104)
-s+='<g transform="translate(205 325) scale(.8)">'+ship+'</g>'
+s+='<g transform="translate(205 315) scale(.83)">'+ship+'</g>'
 s+=rect(48,426,360,5,'#cc99cc',2)
 s+=txt(48,462,'EXPLORATION SYSTEMS',18,'#ff9966',weight='700')
 for y,l,v in [(495,'SENSORS','ONLINE'),(523,'DRIVE FIELD','STABLE'),(551,'NAVIGATION','ALIGNED')]:s+=txt(48,y,l,16,'#b6bdd0')+txt(406,y,v,16,'#ffcc99',anchor='end')
