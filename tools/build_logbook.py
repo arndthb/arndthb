@@ -21,7 +21,7 @@ SECTIONS=[
  {'title':'PERSONAL LOG','deck':'IDENTITY / BACKGROUND','colour':ORANGE,'meta':['SUBJECT: ARNDT BOHRENKÄMPER','CURIOUS · OPERATIONAL · STILL LEARNING'],
  'entries':[
  ('p',"Personal log. I've spent a fair amount of time exploring the wonderful universe of computers."),
- ('p','Some people collect stamps; I collect questions about how technology works — and spare cables.'),
+ ('p','Some people collect stamps. I collect questions about how technology works. The spare cables seem to accumulate by themselves.'),
  ('p',"My route hasn't followed a standard flight plan: entrepreneurship, leadership and IT consulting."),
  ('p','The best discoveries often begin with a simple question: Why does it work like that?'),
  ('p','Current interests: artificial intelligence, cybersecurity, Linux and connected systems.')]},
@@ -36,7 +36,7 @@ SECTIONS=[
  ('row','SIM-04','Counterfactual simulations'),
  ('row','MEM-05','Long-term threat memory'),
  ('row','HUM-06','Human–AI collaboration in security operations'),
- ('note',"SCIENCE OFFICER'S NOTE",'Research in progress — not a production-ready security product.')]},
+ ('note',"SCIENCE OFFICER'S NOTE",'Research is still in progress. This is not a production-ready security product.')]},
  {'title':'SCIENCE LOG','deck':'AREAS OF EXPLORATION','colour':BLUE,'meta':['DIRECTIVE: EXPLORE · EXPERIMENT · UNDERSTAND'],
  'entries':[
  ('row','COMPUTER CORE','Linux · Containers · Kubernetes · Automation · Networking'),
@@ -140,7 +140,7 @@ def build(mobile=False):
         text('END OF PERSONAL LOG',x,y+21,17,LAVENDER,'bold')
         text('LIVE LONG AND PROSPER',right,y+21,24,GOLD,'bold','end');h=y+69
     desc='Complete personal logbook of Arndt Bohrenkämper: personal background; AQVIONIS experimental AI-assisted security research; computing, AI, security and philosophy; Star Trek, retro gaming and martial arts; curiosity and lifelong learning. Readable '+('mobile' if mobile else 'desktop')+' layout with orange and lavender LCARS rails on black.'
-    header=f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="log-title log-description">\n<title id="log-title">Arndt Bohrenkämper — personal LCARS logbook</title>\n<desc id="log-description">{escape(desc)}</desc>\n<rect width="{w}" height="{h}" fill="#000000"/>\n<g font-family="Arial, Helvetica, sans-serif">\n'
+    header=f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="log-title log-description">\n<title id="log-title">Arndt Bohrenkämper: personal LCARS logbook</title>\n<desc id="log-description">{escape(desc)}</desc>\n<rect width="{w}" height="{h}" fill="#000000"/>\n<g font-family="Arial, Helvetica, sans-serif">\n'
     result=header+'\n'.join(out)+'\n</g>\n</svg>\n'
     target=ROOT/('lcars-logbook-mobile.svg' if mobile else 'lcars-logbook.svg')
     target.write_text(result)
