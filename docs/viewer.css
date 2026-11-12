@@ -3,3 +3,5 @@
 button:disabled{opacity:.4;cursor:default}.heading img{display:block;width:min(100%,420px);height:auto}h1{line-height:0}
 
 .heading{min-width:0}
+
+.cabin-note{color:var(--lavender);font-size:12px;line-height:1.6;margin:0 0 16px;max-width:65ch}.cabin-note[hidden]{display:none}#interior{background:#99ccee}#interior[aria-pressed=true]{background:var(--orange)}

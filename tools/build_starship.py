@@ -353,3 +353,7 @@ mesh_lines.append({'p':[(-5,-152.5,22),(5,-152.5,22)],'c':'#c8d6da','w':1.4,'bia
 (ROOT/"docs/shuttle.json").write_text(json.dumps({"faces":mesh,"lines":mesh_lines,"beacons":mesh_beacons,"labels":mesh_labels},separators=(",",":")))
 
 (ROOT/"docs/viewer-heading.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="420" height="62" viewBox="0 0 420 62" role="img" aria-label="Shuttle inspection"><text x="0" y="48" font-size="56" fill="#ffd3a5">SHUTTLE INSPECTION</text></svg>')
+
+# Regenerate the companion cutaway whenever the exterior mesh changes.
+import runpy
+runpy.run_path(str(ROOT/"tools/build_interior.py"))
