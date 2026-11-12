@@ -47,7 +47,7 @@ SECTIONS=[
  ('p','I find the unanswered ones even more interesting.')]},
  {'title':'OFF-DUTY LOG','deck':'BEYOND THE KEYBOARD','colour':ORANGE,'meta':['LOCATION: BETWEEN THE HOLODECK','AND THE COMPUTER LAB'],
  'entries':[
- ('row','STAR TREK',"Exploration, science and imagining a better tomorrow. Yes, I'm a Trekkie."),
+ ('row','STAR TREK',"Exploration, science and imagining a better tomorrow."),
  ('row','RETRO GAMING','Classic point-and-click adventures; the stranger the inventory, the better.'),
  ('row','COMPUTERS','Hardware, operating systems and occasionally unnecessary experiments.'),
  ('row','MARTIAL ARTS','Shotokan Karate and Okinawan Kobudō (Jinbukan tradition).'),
