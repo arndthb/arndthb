@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/bd6c1b1d49475845ca5f269c90e8adc94e95ef28/assets/lcars-starship-mobile.svg">
-  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/bd6c1b1d49475845ca5f269c90e8adc94e95ef28/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s exploration terminal. A research shuttle inspired by classic TNG proportions, with a compact ivory hull, broad paired cockpit windows, low engine pods and recessed blue propulsion channels. A visible star field surrounds the craft. Status lights pulse gently across several systems, with support for reduced motion.">
+  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/d67160f438282372a5615a9e03f3883b8a7f17de/assets/lcars-starship-mobile.svg">
+  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/d67160f438282372a5615a9e03f3883b8a7f17de/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s exploration terminal. A research shuttle inspired by classic TNG proportions, with a compact ivory hull, a long dark windshield, angular side windows and short engine pods with orange collars and recessed blue propulsion channels. A visible star field surrounds the craft. Status lights pulse gently across several systems, with support for reduced motion.">
 </picture>
 <picture>
   <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/702708a2f7ad8f8e9c82d3b44d8b230d5962a8f0/assets/lcars-logbook-mobile.svg">
