@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="75" viewBox="0 0 1100 75"><rect width="1100" height="75" rx="24" fill="#11121c"/><rect x="18" y="12" width="1064" height="51" rx="24" fill="#e9a16d"/><text x="550" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" font-weight="bold" fill="#17121e">OPEN MISSION FILE  //  AQVIONIS  →</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="84" viewBox="0 0 1000 84" role="img" aria-labelledby="link-title link-description">
+<title id="link-title">Open AQVIONIS mission file on GitHub — research access required</title>
+<desc id="link-description">Access the private AQVIONIS research repository. Repository access is required. Experimental AI-assisted security research.</desc>
+<rect width="1000" height="84" fill="#000000"/>
+<rect x="20" y="0" width="58" height="66" fill="#ff9966"/>
+<path d="M105 0H954Q980 0 980 26V66H105Z" fill="#ff9966"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#000000" font-weight="bold">
+<text x="127" y="43" font-size="24">OPEN MISSION FILE / AQVIONIS</text>
+<text x="912" y="41" font-size="15" text-anchor="end">PRIVATE RESEARCH REPOSITORY</text>
+<path d="M932 33h26m-11-11 11 11-11 11" fill="none" stroke="#000000" stroke-width="3"/>
+</g>
+</svg>

@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="3615" viewBox="0 0 420 3615" role="img" aria-labelledby="log-title log-description">
+<title id="log-title">Arndt Bohrenkämper — personal LCARS logbook</title>
+<desc id="log-description">Complete personal logbook of Arndt Bohrenkämper: personal background; AQVIONIS experimental AI-assisted security research; computing, AI, security and philosophy; Star Trek, retro gaming and martial arts; curiosity and lifelong learning. Readable mobile layout with orange and lavender LCARS rails on black.</desc>
+<rect width="420" height="3615" fill="#000000"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="12" y="0" width="22" height="20" fill="#cc99cc"/>
+<rect x="48" y="0" width="354" height="8" fill="#cc99cc"/>
+<text x="48" y="48" font-size="25" fill="#ffcc99" font-weight="bold">PERSONAL LOGBOOK</text>
+<text x="48" y="79" font-size="20" fill="#eee8e5" font-weight="bold">ARNDT BOHRENKÄMPER</text>
+<text x="48" y="111" font-size="14" fill="#cc99cc">TO BOLDLY GO WHERE NO ONE</text>
+<text x="48" y="131" font-size="14" fill="#cc99cc">HAS GONE BEFORE</text>
+<path d="M12 204V190Q12 165 37 165H402V172H46Q34 172 34 190V204Z" fill="#ff9966"/>
+<text x="48" y="197" font-size="15" fill="#ff9966" font-weight="bold">01</text>
+<text x="83" y="197" font-size="24" fill="#eee8e5" font-weight="bold">PERSONAL LOG</text>
+<text x="48" y="224" font-size="15" fill="#ff9966" font-weight="bold">IDENTITY / BACKGROUND</text>
+<text x="48" y="252" font-size="14" fill="#ff9966">SUBJECT: ARNDT BOHRENKÄMPER</text>
+<text x="48" y="279" font-size="14" fill="#ff9966">CURIOUS · OPERATIONAL · STILL LEARNING</text>
+<text x="48" y="316" font-size="18" fill="#eee8e5">Personal log. I&#x27;ve spent a fair amount of</text>
+<text x="48" y="343" font-size="18" fill="#eee8e5">time exploring the wonderful universe of</text>
+<text x="48" y="370" font-size="18" fill="#eee8e5">computers.</text>
+<text x="48" y="408" font-size="18" fill="#eee8e5">Some people collect stamps; I collect</text>
+<text x="48" y="435" font-size="18" fill="#eee8e5">questions about how technology works</text>
+<text x="48" y="462" font-size="18" fill="#eee8e5">— and spare cables.</text>
+<text x="48" y="500" font-size="18" fill="#eee8e5">My route hasn&#x27;t followed a standard</text>
+<text x="48" y="527" font-size="18" fill="#eee8e5">flight plan: entrepreneurship, leadership</text>
+<text x="48" y="554" font-size="18" fill="#eee8e5">and IT consulting.</text>
+<text x="48" y="592" font-size="18" fill="#eee8e5">The best discoveries often begin with a</text>
+<text x="48" y="619" font-size="18" fill="#eee8e5">simple question: Why does it work like</text>
+<text x="48" y="646" font-size="18" fill="#eee8e5">that?</text>
+<text x="48" y="684" font-size="18" fill="#eee8e5">Current interests: artificial intelligence,</text>
+<text x="48" y="711" font-size="18" fill="#eee8e5">cybersecurity, Linux and connected</text>
+<text x="48" y="738" font-size="18" fill="#eee8e5">systems.</text>
+<rect x="12" y="212" width="22" height="364" fill="#ff9966"/>
+<rect x="12" y="582" width="22" height="199" fill="#cc99cc"/>
+<rect x="48" y="777" width="354" height="4" fill="#ff9966"/>
+<path d="M12 858V844Q12 819 37 819H402V826H46Q34 826 34 844V858Z" fill="#cc99cc"/>
+<text x="48" y="851" font-size="15" fill="#cc99cc" font-weight="bold">02</text>
+<text x="83" y="851" font-size="24" fill="#eee8e5" font-weight="bold">MISSION LOG</text>
+<text x="48" y="878" font-size="15" fill="#cc99cc" font-weight="bold">AQVIONIS / SECURITY RESEARCH</text>
+<text x="48" y="906" font-size="14" fill="#cc99cc">CLASSIFICATION: EXPERIMENTAL RESEARCH</text>
+<text x="48" y="933" font-size="14" fill="#cc99cc">STATUS: IN PROGRESS</text>
+<text x="48" y="977" font-size="37" fill="#cc99cc" font-weight="bold">AQVIONIS</text>
+<text x="48" y="1027" font-size="18" fill="#eee8e5">Mission objective: explore AI-assisted</text>
+<text x="48" y="1054" font-size="18" fill="#eee8e5">detection of suspicious behaviour in</text>
+<text x="48" y="1081" font-size="18" fill="#eee8e5">infrastructure.</text>
+<text x="48" y="1119" font-size="18" fill="#eee8e5">Connect observations across systems</text>
+<text x="48" y="1146" font-size="18" fill="#eee8e5">and time to reconstruct attack paths and</text>
+<text x="48" y="1173" font-size="18" fill="#eee8e5">aid investigation.</text>
+<text x="48" y="1211" font-size="14" fill="#cc99cc" font-weight="bold">SEC-01</text>
+<text x="48" y="1235" font-size="18" fill="#eee8e5">AI-assisted threat hunting and anomaly</text>
+<text x="48" y="1262" font-size="18" fill="#eee8e5">detection</text>
+<text x="48" y="1300" font-size="14" fill="#cc99cc" font-weight="bold">OBS-02</text>
+<text x="48" y="1324" font-size="18" fill="#eee8e5">Infrastructure, MCP and AI-agent</text>
+<text x="48" y="1351" font-size="18" fill="#eee8e5">observability</text>
+<text x="48" y="1389" font-size="14" fill="#cc99cc" font-weight="bold">GRAPH-03</text>
+<text x="48" y="1413" font-size="18" fill="#eee8e5">Threat graphs and attack-path</text>
+<text x="48" y="1440" font-size="18" fill="#eee8e5">visualisation</text>
+<text x="48" y="1478" font-size="14" fill="#cc99cc" font-weight="bold">SIM-04</text>
+<text x="48" y="1502" font-size="18" fill="#eee8e5">Counterfactual simulations</text>
+<text x="48" y="1540" font-size="14" fill="#cc99cc" font-weight="bold">MEM-05</text>
+<text x="48" y="1564" font-size="18" fill="#eee8e5">Long-term threat memory</text>
+<text x="48" y="1602" font-size="14" fill="#cc99cc" font-weight="bold">HUM-06</text>
+<text x="48" y="1626" font-size="18" fill="#eee8e5">Human–AI collaboration in security</text>
+<text x="48" y="1653" font-size="18" fill="#eee8e5">operations</text>
+<rect x="48" y="1687" width="354" height="1" fill="#cc99cc"/>
+<text x="48" y="1716" font-size="13" fill="#cc99cc" font-weight="bold">SCIENCE OFFICER&#x27;S NOTE</text>
+<text x="48" y="1741" font-size="17" fill="#ffcc99">Research in progress — not a</text>
+<text x="48" y="1768" font-size="17" fill="#ffcc99">production-ready security product.</text>
+<rect x="12" y="866" width="22" height="603" fill="#cc99cc"/>
+<rect x="12" y="1475" width="22" height="333" fill="#ff9966"/>
+<rect x="48" y="1804" width="354" height="4" fill="#cc99cc"/>
+<path d="M12 1885V1871Q12 1846 37 1846H402V1853H46Q34 1853 34 1871V1885Z" fill="#99bbee"/>
+<text x="48" y="1878" font-size="15" fill="#99bbee" font-weight="bold">03</text>
+<text x="83" y="1878" font-size="24" fill="#eee8e5" font-weight="bold">SCIENCE LOG</text>
+<text x="48" y="1905" font-size="15" fill="#99bbee" font-weight="bold">AREAS OF EXPLORATION</text>
+<text x="48" y="1933" font-size="14" fill="#99bbee">DIRECTIVE: EXPLORE · EXPERIMENT ·</text>
+<text x="48" y="1960" font-size="14" fill="#99bbee">UNDERSTAND</text>
+<text x="48" y="1997" font-size="14" fill="#99bbee" font-weight="bold">COMPUTER CORE</text>
+<text x="48" y="2021" font-size="18" fill="#eee8e5">Linux · Containers · Kubernetes ·</text>
+<text x="48" y="2048" font-size="18" fill="#eee8e5">Automation · Networking</text>
+<text x="48" y="2086" font-size="14" fill="#99bbee" font-weight="bold">AI LABORATORY</text>
+<text x="48" y="2110" font-size="18" fill="#eee8e5">AI agents · Local language models ·</text>
+<text x="48" y="2137" font-size="18" fill="#eee8e5">Machine learning · AI security</text>
+<text x="48" y="2175" font-size="14" fill="#99bbee" font-weight="bold">SECURITY ARRAY</text>
+<text x="48" y="2199" font-size="18" fill="#eee8e5">Threat hunting · Observability · Attack</text>
+<text x="48" y="2226" font-size="18" fill="#eee8e5">graphs · Security research</text>
+<text x="48" y="2264" font-size="14" fill="#99bbee" font-weight="bold">PHILOSOPHY DECK</text>
+<text x="48" y="2288" font-size="18" fill="#eee8e5">Intelligence · Consciousness · The</text>
+<text x="48" y="2315" font-size="18" fill="#eee8e5">origins and possibilities of life</text>
+<text x="48" y="2353" font-size="18" fill="#eee8e5">The ship&#x27;s computer is excellent at</text>
+<text x="48" y="2380" font-size="18" fill="#eee8e5">answering questions.</text>
+<text x="48" y="2418" font-size="18" fill="#eee8e5">I find the unanswered ones even more</text>
+<text x="48" y="2445" font-size="18" fill="#eee8e5">interesting.</text>
+<rect x="12" y="1893" width="22" height="381" fill="#99bbee"/>
+<rect x="12" y="2280" width="22" height="208" fill="#cc99cc"/>
+<rect x="48" y="2484" width="354" height="4" fill="#99bbee"/>
+<path d="M12 2565V2551Q12 2526 37 2526H402V2533H46Q34 2533 34 2551V2565Z" fill="#ff9966"/>
+<text x="48" y="2558" font-size="15" fill="#ff9966" font-weight="bold">04</text>
+<text x="83" y="2558" font-size="24" fill="#eee8e5" font-weight="bold">OFF-DUTY LOG</text>
+<text x="48" y="2585" font-size="15" fill="#ff9966" font-weight="bold">BEYOND THE KEYBOARD</text>
+<text x="48" y="2613" font-size="14" fill="#ff9966">LOCATION: BETWEEN THE HOLODECK</text>
+<text x="48" y="2640" font-size="14" fill="#ff9966">AND THE COMPUTER LAB</text>
+<text x="48" y="2677" font-size="14" fill="#ff9966" font-weight="bold">STAR TREK</text>
+<text x="48" y="2701" font-size="18" fill="#eee8e5">Exploration, science and imagining a</text>
+<text x="48" y="2728" font-size="18" fill="#eee8e5">better tomorrow. Yes, I&#x27;m a Trekkie.</text>
+<text x="48" y="2766" font-size="14" fill="#ff9966" font-weight="bold">RETRO GAMING</text>
+<text x="48" y="2790" font-size="18" fill="#eee8e5">Classic point-and-click adventures; the</text>
+<text x="48" y="2817" font-size="18" fill="#eee8e5">stranger the inventory, the better.</text>
+<text x="48" y="2855" font-size="14" fill="#ff9966" font-weight="bold">COMPUTERS</text>
+<text x="48" y="2879" font-size="18" fill="#eee8e5">Hardware, operating systems and</text>
+<text x="48" y="2906" font-size="18" fill="#eee8e5">occasionally unnecessary experiments.</text>
+<text x="48" y="2944" font-size="14" fill="#ff9966" font-weight="bold">MARTIAL ARTS</text>
+<text x="48" y="2968" font-size="18" fill="#eee8e5">Shotokan Karate and Okinawan Kobudō</text>
+<text x="48" y="2995" font-size="18" fill="#eee8e5">(Jinbukan tradition).</text>
+<text x="48" y="3033" font-size="18" fill="#eee8e5">Different disciplines, familiar lessons:</text>
+<text x="48" y="3060" font-size="18" fill="#eee8e5">patience, practice and attention to detail.</text>
+<rect x="12" y="2573" width="22" height="339" fill="#ff9966"/>
+<rect x="12" y="2918" width="22" height="185" fill="#cc99cc"/>
+<rect x="48" y="3099" width="354" height="4" fill="#ff9966"/>
+<path d="M12 3180V3166Q12 3141 37 3141H402V3148H46Q34 3148 34 3166V3180Z" fill="#cc99cc"/>
+<text x="48" y="3173" font-size="15" fill="#cc99cc" font-weight="bold">05</text>
+<text x="83" y="3173" font-size="24" fill="#eee8e5" font-weight="bold">CAPTAIN’S LOG</text>
+<text x="48" y="3200" font-size="15" fill="#cc99cc" font-weight="bold">GUIDING PRINCIPLES</text>
+<text x="48" y="3228" font-size="14" fill="#cc99cc">STANDING ORDERS: NEVER STOP EXPLORING</text>
+<text x="48" y="3265" font-size="18" fill="#eee8e5">Stay curious. Learn the fundamentals.</text>
+<text x="48" y="3292" font-size="18" fill="#eee8e5">Question assumptions. Improve what you</text>
+<text x="48" y="3319" font-size="18" fill="#eee8e5">can.</text>
+<text x="48" y="3357" font-size="18" fill="#eee8e5">Admit what you don&#x27;t know. Then find</text>
+<text x="48" y="3384" font-size="18" fill="#eee8e5">out.</text>
+<text x="48" y="3422" font-size="18" fill="#eee8e5">The universe is far too interesting to stop</text>
+<text x="48" y="3449" font-size="18" fill="#eee8e5">asking questions.</text>
+<rect x="12" y="3188" width="22" height="195" fill="#cc99cc"/>
+<rect x="12" y="3389" width="22" height="103" fill="#ff9966"/>
+<rect x="48" y="3488" width="354" height="4" fill="#cc99cc"/>
+<rect x="12" y="3530" width="22" height="67" fill="#cc99cc"/>
+<rect x="48" y="3530" width="354" height="8" fill="#cc99cc"/>
+<text x="48" y="3564" font-size="15" fill="#cc99cc" font-weight="bold">END OF PERSONAL LOG</text>
+<text x="48" y="3590" font-size="20" fill="#ffcc99" font-weight="bold">LIVE LONG AND PROSPER</text>
+</g>
+</svg>
