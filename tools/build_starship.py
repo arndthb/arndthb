@@ -54,21 +54,38 @@ def loft(rings,steps=48,base=(151,164,171),axis='y'):
             face(pts,base,normal=norm,tint=((i//3+j//2)%3-1)*1.7)
 
 # Independent AR04 survey shuttle. No franchise spacecraft geometry or insignia.
-def angular_loft(rings,base=(164,175,179)):
+def angular_loft(rings,base=(164,175,179),soft=False):
     section=[(1,.48),(.70,1),(-.70,1),(-1,.48),(-1,-.48),(-.70,-1),(.70,-1),(1,-.48)]
+    if soft:
+        section=[(1,.30),(.995,.50),(.95,.74),(.86,.91),(.66,1),(.30,1),(-.30,1),(-.66,1),(-.86,.91),(-.95,.74),(-.995,.50),(-1,.30),(-1,-.30),(-.98,-.60),(-.85,-.87),(-.65,-1),(.65,-1),(.85,-.87),(.98,-.60),(1,-.30)]
     rr=[[(x+rx*a,y,z+rz*b) for a,b in section] for y,rx,rz,z,x in rings]
     for j in range(len(rr)-1):
-        for i in range(8):
-            k=(i+1)%8
+        for i in range(len(section)):
+            k=(i+1)%len(section)
             pts=[rr[j][i],rr[j+1][i],rr[j+1][k],rr[j][k]]
-            face(pts,base,normal=unit(cross(sub(pts[1],pts[0]),sub(pts[3],pts[0]))),tint=(j%3-1)*2)
+            material=base
+            if soft:
+                height=(section[i][1]+section[k][1])/2
+                material=(185,197,203) if height>.45 else ((141,162,176) if height>-.3 else (99,123,140))
+            face(pts,material,normal=unit(cross(sub(pts[1],pts[0]),sub(pts[3],pts[0]))),tint=0 if soft else (j%3-1))
     face(list(reversed(rr[0])),base,normal=(0,-1,0))
     face(rr[-1],base,normal=(0,1,0))
     return rr
 
 # Faceted lifting cabin, an asymmetrical roof profile and a low instrument nose.
 body=[(-170,48,27,5,0),(-148,72,39,9,0),(-105,83,44,13,0),(-42,85,47,15,0),(28,80,47,16,0),(85,70,40,12,0),(126,57,30,2,0),(159,41,19,-8,0),(176,27,10,-12,0)]
-angular_loft(body)
+def smooth_stations(rings):
+    result=[]
+    for i in range(len(rings)-1):
+        p0=rings[max(0,i-1)];p1=rings[i];p2=rings[i+1];p3=rings[min(len(rings)-1,i+2)]
+        for j in range(6):
+            t=j/6
+            values=[p1[0]+(p2[0]-p1[0])*t]
+            for k in range(1,5):values.append(.5*(2*p1[k]+(-p0[k]+p2[k])*t+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t*t+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*t*t*t))
+            result.append(tuple(values))
+    return result+[rings[-1]]
+body=smooth_stations(body)
+angular_loft(body,soft=True)
 def hull_at(y,a=1,b=1):
     aa,bb=next((aa,bb) for aa,bb in zip(body,body[1:]) if aa[0]<=y<=bb[0])
     t=(y-aa[0])/(bb[0]-aa[0])
@@ -94,9 +111,12 @@ for side in [-1,1]:
     # Recessed blue ion-channel tiles, separated by structural ribs.
     for j in range(18):
         y=-152+j*9
+        channel=[pod_at(yy,a,b) for yy,a,b in [(y-.5,1.035,.41),(y+8.5,1.035,.41),(y+8.5,1.035,-.32),(y-.5,1.035,-.32)]]
+        decal(channel,'#243f53',25)
+        line([channel[0],channel[1]],'#a5c9d9',.7,27)
         pts=[pod_at(yy,a,b) for yy,a,b in [(y,1.025,.30),(y+6.8,1.025,.30),(y+6.8,1.025,-.20),(y,1.025,-.20)]]
-        decal(pts,'#49b4e5',16)
-        line([pts[0],pts[1]],'#b8eeff',.55,17)
+        decal(pts,'url(#driveGlass)',30)
+        line([pts[0],pts[1]],'#b8eeff',.55,32)
     for y in [-147,-110,-73,-36,1,37]:
         line([pod_at(y,-.66,1.025),pod_at(y,.66,1.025)],'#586f7e',.65,3)
     for j in range(8):
@@ -107,9 +127,10 @@ for side in [-1,1]:
     line([p,add(p,(0,7,-2))],'#e6b36e',1.9,6)
 
 # A small swept stabiliser and a roof-mounted environmental sensor mast.
-fin=[(-3,-160,31),(3,-160,31),(-3,-145,107),(3,-145,107),(-3,-103,56),(3,-103,56)]
-solid(fin,[(0,2,4),(1,5,3),(0,1,3,2),(2,3,5,4),(0,4,5,1)],(153,169,176))
-line([(3.2,-146,90),(3.2,-130,72)],'#de9f65',2,3)
+fin=[(-3,-160,31),(-3,-148,91),(-3,-133,86),(-3,-100,56),(3,-160,31),(3,-148,91),(3,-133,86),(3,-100,56)]
+solid(fin,[(0,1,2,3),(4,7,6,5),(0,4,5,1),(1,5,6,2),(2,6,7,3),(0,3,7,4)],(167,183,192))
+line([(3.3,-148,91),(3.3,-133,86)],'#d5e2e7',.9,5)
+line([(3.2,-145,78),(3.2,-133,67)],'#de9f65',1.4,5)
 line([(0,-53,64),(0,-53,80)],'#a6bac7',1.5,3)
 line([(-7,-53,80),(7,-53,80)],'#9ec9d9',1.5,3)
 
@@ -119,32 +140,41 @@ for y in [-133,-111,-82,-55,-28,0]:
 for a in [-.54,.54]:
     line([hull_at(y,a,1.025) for y in [-140,-110,-70,-30,9]],'#849aa5',.6,4)
 for side in [-1,1]:
+    line([hull_at(y,side*.665,1.016) for y in range(-140,131,9)],'#d2dfe3',.8,8)
+    line([hull_at(y,side*.98,-.33) for y in range(-139,141,9)],'#283f50',1.2,8)
+for side in [-1,1]:
     for j in range(4):
         y=-124+j*23
         points=[hull_at(yy,side*a,1.03) for yy,a in [(y,.12),(y+13,.12),(y+13,.39),(y,.39)]]
-        decal(points,'#91a3ab' if j%2 else '#7e939f',5)
+        decal(points,'#a7b8c1' if j%2 else '#92a8b5',8)
         line([points[0],points[1]],'#c0ced2',.6,6)
 
 # A broad, three-pane cockpit on the sloping upper bow, with a visible frame.
 glass=[(-51,35,65),(51,35,65),(39,131,34),(-39,131,34)]
-decal(glass,'#1c303d',17)
 # Three trapezoidal panes share the same physical plane.
 for lo,hi in [(-.94,-.35),(-.29,.29),(.35,.94)]:
+    surround=[(lo*51,35,65),(hi*51,35,65),(hi*39,131,34),(lo*39,131,34)]
+    decal(surround,'#1c303d',60)
     pts=[(lo*51,39,64.2),(hi*51,39,64.2),(hi*39,126,36.6),(lo*39,126,36.6)]
-    decal(pts,'#254e65',19)
+    decal(pts,'url(#cockpitGlass)',62)
     # A crisp reflection gives the glazing depth without raster shine.
-    decal([(lo*51,40,64.4),(hi*51,40,64.4),(hi*44,87,49.4),(lo*44,87,49.4)],'#487a90',20)
-    line([pts[0],pts[1]],'#a9c3cd',.7,21)
-for a,b in zip(glass,glass[1:]+glass[:1]):line([a,b],'#9aacb4',1.8,22)
+    decal([(lo*51,40,64.4),(hi*51,40,64.4),(hi*44,87,49.4),(lo*44,87,49.4)],'url(#glassReflection)',90)
+    line([pts[0],pts[1]],'#c4dbe4',.75,66)
+    line([pts[2],pts[3]],'#507588',.55,66)
+for a,b in zip(glass,glass[1:]+glass[:1]):line([a,b],'#819eaf',1.8,66)
+line([glass[0],glass[1]],'#e0e8e8',.7,68)
 
 # Side glazing, access hatch and service panels on the visible starboard flank.
 side_glass=[hull_at(y,1.025,b) for y,b in [(-30,.40),(44,.40),(44,.06),(-30,.06)]]
-decal(side_glass,'#1b394c',14)
-for y in [-10,17]:line([hull_at(y,1.04,.07),hull_at(y,1.04,.40)],'#a5bbc7',1,16)
+decal(side_glass,'url(#cockpitGlass)',32)
+for y in [-10,17]:line([hull_at(y,1.04,.07),hull_at(y,1.04,.40)],'#b6ccd6',1,34)
 door=[hull_at(y,1.025,b) for y,b in [(-120,.44),(-63,.44),(-63,-.49),(-120,-.49)]]
-decal(door,'#627987',14)
-for a,b in zip(door,door[1:]+door[:1]):line([a,b],'#b1c0c6',.65,16)
-line([hull_at(-77,1.04,.10),hull_at(-77,1.04,-.04)],'#e3d1a7',1.3,18)
+decal(door,'#718a9b',32)
+for a,b in zip(door,door[1:]+door[:1]):line([a,b],'#ccd8dc',.7,34)
+line([hull_at(-77,1.04,.10),hull_at(-77,1.04,-.04)],'#e3d1a7',1.3,36)
+line([hull_at(-115,1.06,-.56),hull_at(-67,1.06,-.56)],'#b1c9d6',1.6,36)
+for y in [-111,-102,-93,-84,-75]:
+    line([hull_at(y,1.055,-.43),hull_at(y+3,1.055,-.43)],'#ddbb82',1,35)
 for y in [-138,-48,48,91,135]:
     line([hull_at(y,1.02,.44),hull_at(y,1.02,-.43)],'#536b79',.55,8)
 for j in range(6):
@@ -156,6 +186,21 @@ sensor=[(-25,176,-6),(25,176,-6),(22,178,-18),(-22,178,-18)]
 decal(sensor,'#263c4e',15)
 for x in [-17,-7,7,17]:line([(x,179,-8),(x,180,-15)],'#74cce3',1.8,17)
 line([(-18,170,0),(18,170,0)],'#d2d9d2',.7,8)
+
+# Instrument lenses, thrusters and restrained identification stencils.
+for x in [-10,0,10]:
+    p=(x,180,-11);xx,yy=proj(p)
+    faces.append((dot(p,V)+21,f'<circle cx="{n(xx)}" cy="{n(yy)}" r="1.2" fill="#b4e8f4"/>'))
+for y in [92,117,141]:
+    p=hull_at(y,1.05,-.05)
+    line([p,add(p,(0,2.5,0))],'#283b49',2.3,24)
+    line([add(p,(.5,0,.8)),add(p,(.5,2.5,.8))],'#e1c391',.65,25)
+def stencil(text,p,size,along=(1,0,0),down=(0,1,0),colour='#405669'):
+    x,y=proj(p);a,b=proj(along);c,d=proj(down)
+    label=f'<text transform="matrix({n(a)} {n(b)} {n(c)} {n(d)} {n(x)} {n(y)})" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="{size}" font-weight="700" letter-spacing="1" fill="{colour}">{escape(text)}</text>'
+    faces.append((dot(p,V)+45,label))
+stencil('AR04',(0,-91,63),10)
+stencil('AR04',hull_at(-96,1.06,.28),7,(0,-1,0),(0,0,-1),'#d4e1e5')
 
 # Tiny emissive approach beacons. The animation affects only these points.
 for p,c,delay in [((53,120,34),'#8ce1ce','0s'),((-53,120,34),'#e4a778','1.6s'),((136,58,11),'#94d9f5','.8s'),((-136,58,11),'#94d9f5','2.4s')]:
@@ -173,7 +218,8 @@ def paint(m):
 ship=re.sub(r'fill="(#[a-f0-9]+)" stroke="\1" stroke-width="\.22" stroke-linejoin="round"',paint,ship)
 styles=''.join('.'+cls+'{fill:'+c+';stroke:'+c+'}' for c,cls in paints.items())
 styles+='@keyframes statusPulse{0%,55%,100%{opacity:.32}65%,82%{opacity:1}}@keyframes starTwinkle{0%,100%{opacity:.35}50%{opacity:1}}.status-beacon{animation:statusPulse 3.8s ease-in-out infinite}.star-twinkle{animation:starTwinkle 7.2s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.status-beacon,.star-twinkle{animation:none;opacity:1}}'
-ship='<style>'+styles+'</style><g stroke-width=".22" stroke-linejoin="round">'+ship+'</g>'
+defs='<defs><linearGradient id="cockpitGlass" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#74aec6"/><stop offset=".33" stop-color="#305d78"/><stop offset="1" stop-color="#0b2032"/></linearGradient><linearGradient id="glassReflection" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#e0f1f8" stop-opacity=".65"/><stop offset=".4" stop-color="#a0c9dc" stop-opacity=".22"/><stop offset="1" stop-color="#71a1c4" stop-opacity="0"/></linearGradient><linearGradient id="driveGlass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#abebff"/><stop offset=".35" stop-color="#4faee0"/><stop offset="1" stop-color="#1b5f9d"/></linearGradient></defs>'
+ship=defs+'<style>'+styles+'</style><g stroke-width=".22" stroke-linejoin="round">'+ship+'</g>'
 
 def txt(x,y,text,size=16,fill='#cc99cc',anchor=None,weight=None,spacing=None):
     a=f' x="{x}" y="{y}" fill="{fill}" font-size="{size}"'
@@ -185,7 +231,7 @@ def rect(x,y,w,h,fill,rx=0):return f'<rect x="{x}" y="{y}" width="{w}" height="{
 def start(w,h,title,desc):
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="title desc"><title id="title">{escape(title)}</title><desc id="desc">{escape(desc)}</desc><rect width="{w}" height="{h}" fill="#000"/><g font-family="Arial,Helvetica,sans-serif">'
 title='Arndt Bohrenkämper: personal LCARS terminal'
-desc='An independently designed fictional survey shuttle in a detailed three-quarter view. A faceted metallic cabin, broad cockpit glazing, swept shoulders, compact blue propulsion pods and a forward sensor array sit within a dark exploration console. A visible star field surrounds the craft. Small status lights pulse slowly across several systems, with a few stars twinkling. Reduced-motion preferences disable all animation.'
+desc='An independently designed fictional survey shuttle in a detailed three-quarter view. A sculpted metallic cabin with rounded shoulders, reflective three-pane cockpit glazing, recessed blue drive channels, service hatches and a forward sensor array sit within a dark exploration console. A visible star field surrounds the craft. Small status lights pulse slowly across several systems, with a few stars twinkling. Reduced-motion preferences disable all animation.'
 
 def chart(x,y,w,h):
     random.seed(47)
