@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/8080c3ab9412328f1f3abbb9c029272043ce6155/assets/lcars-starship-mobile.svg">
-  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/8080c3ab9412328f1f3abbb9c029272043ce6155/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s LCARS terminal. U.S.S. Enterprise NCC-1701-D, Galaxy class, in a detailed three-quarter view; sensors online and exploration systems ready.">
+  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/9522ffe1947242d661a306f58095e4a256ea08bc/assets/lcars-starship-mobile.svg">
+  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/9522ffe1947242d661a306f58095e4a256ea08bc/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s exploration terminal. An independently designed research shuttle with a faceted cabin, broad cockpit glazing and twin blue propulsion pods. Status beacons pulse gently, with support for reduced motion.">
 </picture>
 <picture>
   <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/702708a2f7ad8f8e9c82d3b44d8b230d5962a8f0/assets/lcars-logbook-mobile.svg">
