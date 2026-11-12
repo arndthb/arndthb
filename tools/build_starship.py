@@ -158,7 +158,7 @@ for x in [-17,-7,7,17]:line([(x,179,-8),(x,180,-15)],'#74cce3',1.8,17)
 line([(-18,170,0),(18,170,0)],'#d2d9d2',.7,8)
 
 # Tiny emissive approach beacons. The animation affects only these points.
-for p,c,delay in [((53,120,34),'#8ce1ce','0s'),((-53,120,34),'#e4a778','1.6s')]:
+for p,c,delay in [((53,120,34),'#8ce1ce','0s'),((-53,120,34),'#e4a778','1.6s'),((136,58,11),'#94d9f5','.8s'),((-136,58,11),'#94d9f5','2.4s')]:
     x,y=proj(p)
     faces.append((dot(p,V)+24,f'<g class="status-beacon" style="animation-delay:{delay}"><circle cx="{n(x)}" cy="{n(y)}" r="2.4" fill="{c}" opacity=".2"/><circle cx="{n(x)}" cy="{n(y)}" r=".95" fill="{c}"/></g>'))
 
@@ -172,7 +172,7 @@ def paint(m):
     return 'class="'+paints[colour]+'"'
 ship=re.sub(r'fill="(#[a-f0-9]+)" stroke="\1" stroke-width="\.22" stroke-linejoin="round"',paint,ship)
 styles=''.join('.'+cls+'{fill:'+c+';stroke:'+c+'}' for c,cls in paints.items())
-styles+='@keyframes statusPulse{0%,55%,100%{opacity:.32}65%,82%{opacity:1}}.status-beacon{animation:statusPulse 3.8s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.status-beacon{animation:none;opacity:1}}'
+styles+='@keyframes statusPulse{0%,55%,100%{opacity:.32}65%,82%{opacity:1}}@keyframes starTwinkle{0%,100%{opacity:.35}50%{opacity:1}}.status-beacon{animation:statusPulse 3.8s ease-in-out infinite}.star-twinkle{animation:starTwinkle 7.2s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.status-beacon,.star-twinkle{animation:none;opacity:1}}'
 ship='<style>'+styles+'</style><g stroke-width=".22" stroke-linejoin="round">'+ship+'</g>'
 
 def txt(x,y,text,size=16,fill='#cc99cc',anchor=None,weight=None,spacing=None):
@@ -185,7 +185,7 @@ def rect(x,y,w,h,fill,rx=0):return f'<rect x="{x}" y="{y}" width="{w}" height="{
 def start(w,h,title,desc):
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-labelledby="title desc"><title id="title">{escape(title)}</title><desc id="desc">{escape(desc)}</desc><rect width="{w}" height="{h}" fill="#000"/><g font-family="Arial,Helvetica,sans-serif">'
 title='Arndt Bohrenkämper: personal LCARS terminal'
-desc='An independently designed fictional survey shuttle in a detailed three-quarter view. A faceted metallic cabin, broad cockpit glazing, swept shoulders, compact blue propulsion pods and a forward sensor array sit within a dark exploration console. Small status beacons pulse slowly; reduced-motion preferences disable the animation.'
+desc='An independently designed fictional survey shuttle in a detailed three-quarter view. A faceted metallic cabin, broad cockpit glazing, swept shoulders, compact blue propulsion pods and a forward sensor array sit within a dark exploration console. A visible star field surrounds the craft. Small status lights pulse slowly across several systems, with a few stars twinkling. Reduced-motion preferences disable all animation.'
 
 def chart(x,y,w,h):
     random.seed(47)
@@ -200,6 +200,19 @@ def chart(x,y,w,h):
     s+=f'<path d="M{x+15} {y+h-12}L{x+w*.4} {y+h*.55}L{x+w-16} {y+15}" fill="none" stroke="#6f6085" stroke-width="1" stroke-dasharray="3 6"/>'
     return s
 
+def starfield(x,y,w,h,count,seed):
+    rng=random.Random(seed);out=[]
+    for i in range(count):
+        xx=x+rng.random()*w;yy=y+rng.random()*h
+        radius=1.35 if i%13==0 else (.9 if i%3==0 else .65)
+        colour=['#b6c9df','#e2dfd0','#8eb9d2'][i%3]
+        animated=i%9==0
+        attrs=f' class="star-twinkle" style="animation-delay:-{n(rng.random()*7.2)}s"' if animated else f' opacity="{n(.5+rng.random()*.35)}"'
+        out.append(f'<g{attrs}><circle cx="{n(xx)}" cy="{n(yy)}" r="{radius}" fill="{colour}"/>')
+        if i%19==0:out.append(f'<path d="M{n(xx-2.5)} {n(yy)}h5M{n(xx)} {n(yy-2.5)}v5" fill="none" stroke="{colour}" stroke-width=".45"/>')
+        out.append('</g>')
+    return ''.join(out)
+
 s=start(1000,790,title,desc)
 s+='<path d="M20 114V60Q20 20 60 20H171V46H81Q78 46 78 63V114Z" fill="#ff9966"/>'
 s+=rect(184,20,584,12,'#ff9966')+rect(778,20,202,12,'#cc99cc',6)
@@ -211,11 +224,8 @@ for y,h,c,label in [(122,95,'#cc99cc','01'),(225,70,'#a38abd','02'),(303,141,'#f
 s+=txt(105,166,'SURVEY SHUTTLE',29,'#cc99cc',weight='700')+txt(105,192,'AR04  /  INDEPENDENT RESEARCH CRAFT',18,'#ffcc99',spacing=1)
 s+=txt(978,142,'INDEPENDENT EXPLORATION CRAFT',14,'#a6b4cc',anchor='end')
 s+=txt(978,164,'VESSEL STATUS  /  NOMINAL',14,'#ff9966',anchor='end')
-# Sparse stars stay subordinate to the hull.
-random.seed(1701)
-for i in range(48):
-    x=random.randint(110,972);y=random.randint(195,575)
-    s+=f'<circle cx="{x}" cy="{y}" r="{.7 if i%4 else 1.1}" fill="#506077" opacity=".65"/>'
+# Visible stars remain behind the craft, with only a few slowly twinkling.
+s+=starfield(111,209,863,387,130,47)
 s+='<path d="M112 201H172M112 201V229M978 201H918M978 201V229M112 582H172M112 582V554M978 582H918M978 582V554" fill="none" stroke="#465267" stroke-width="1"/>'
 s+='<g transform="translate(530 407) scale(1.7)">'+ship+'</g>'
 # Fine callout tracks stay outside the main silhouette.
@@ -227,11 +237,15 @@ s+=txt(105,649,'01  LONG-RANGE SENSORS',16,'#ff9966',weight='700')
 s+=chart(105,661,250,72)+txt(105,755,'SECTOR 001  /  SOL SYSTEM',13,'#a6b4cc')
 s+=txt(398,649,'02  PROPULSION',16,'#cc99cc',weight='700')
 s+=txt(398,682,'DRIVE FIELD',14,'#b6bdd0')+txt(655,682,'STABLE',14,'#99ccee',anchor='end')
-for i in range(18):s+=rect(398+i*14.5,696,10.5,23,'#99bbee' if i<15 else '#273446',2)
+for i in range(18):
+    if i==14:s+='<g class="status-beacon" style="animation-delay:1.2s">'
+    s+=rect(398+i*14.5,696,10.5,23,'#99bbee' if i<15 else '#273446',2)
+    if i==14:s+='</g>'
 s+=txt(398,755,'TWIN DRIVE PODS / SYNCHRONISED',13,'#a6b4cc')
 s+=txt(707,649,'03  SCIENCE OPERATIONS',16,'#ff9966',weight='700')
 for y,l,v in [(681,'SENSORS','ONLINE'),(708,'NAVIGATION','ALIGNED'),(735,'MISSION','EXPLORATION')]:s+=txt(707,y,l,13,'#a6b4cc')+txt(978,y,v,13,'#ffcc99',anchor='end')
 s+='<g class="status-beacon" style="animation-delay:.7s"><circle cx="850" cy="677" r="2.6" fill="#99ccee"/></g>'
+s+='<g class="status-beacon" style="animation-delay:2s"><circle cx="850" cy="704" r="2.6" fill="#ffcc99"/></g>'
 s+='<path d="M20 649V730Q20 772 62 772H78V649Z" fill="#cc99cc"/>'+rect(105,773,875,5,'#cc99cc',2)
 s+='</g></svg>'
 (ROOT/'assets/lcars-starship.svg').write_text(s)
@@ -242,11 +256,14 @@ s+=txt(48,72,'ARNDT',36,'#ffcc99',weight='700')+txt(48,108,'BOHRENKÄMPER',36,'#
 s+=txt(48,136,'PERSONAL TERMINAL / LCARS 47',16,'#cc99cc',spacing=.6)
 s+=rect(12,105,22,124,'#cc99cc')+rect(12,237,22,110,'#ff9966')+rect(12,355,22,70,'#879ab9')
 s+=txt(48,177,'SURVEY SHUTTLE',25,'#cc99cc',weight='700')+txt(48,202,'AR04 / RESEARCH CRAFT',17,'#ffcc99')
+s+=starfield(48,212,357,208,65,104)
 s+='<g transform="translate(205 325) scale(.8)">'+ship+'</g>'
 s+=rect(48,426,360,5,'#cc99cc',2)
 s+=txt(48,462,'EXPLORATION SYSTEMS',18,'#ff9966',weight='700')
 for y,l,v in [(495,'SENSORS','ONLINE'),(523,'DRIVE FIELD','STABLE'),(551,'NAVIGATION','ALIGNED')]:s+=txt(48,y,l,16,'#b6bdd0')+txt(406,y,v,16,'#ffcc99',anchor='end')
 s+='<g class="status-beacon" style="animation-delay:.7s"><circle cx="240" cy="491" r="2.6" fill="#99ccee"/></g>'
+s+='<g class="status-beacon" style="animation-delay:1.2s"><circle cx="240" cy="519" r="2.6" fill="#99ccee"/></g>'
+s+='<g class="status-beacon" style="animation-delay:2s"><circle cx="240" cy="547" r="2.6" fill="#ffcc99"/></g>'
 s+=chart(48,570,145,51)
 s+=txt(222,590,'SECTOR 001',16,'#cc99cc')+txt(222,615,'SOL SYSTEM',15,'#99bbee')
 s+='<path d="M12 433V610Q12 638 34 638V433Z" fill="#cc99cc"/>'+rect(48,634,360,4,'#cc99cc',2)

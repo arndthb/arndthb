@@ -33,6 +33,6 @@ The README pins image URLs to a verified artwork commit. This prevents GitHub’
 
 ## Motion and scope
 
-Three small status beacons pulse slowly using SVG CSS animation. The cycle is 3.8 seconds; no JavaScript is used. A `prefers-reduced-motion: reduce` media query keeps the beacons steady. The entire display remains readable as a static image.
+Seven small status beacons pulse slowly across the craft, propulsion, sensor and navigation displays using SVG CSS animation. Their cycle is 3.8 seconds. A visible star field sits behind the craft in both layouts, with a few stars twinkling over 7.2 seconds. No JavaScript is used. A `prefers-reduced-motion: reduce` media query keeps all beacons and stars steady. The entire display remains readable as a static image.
 
 The console draws inspiration from LCARS. The independent shuttle design is not a legal clearance of the overall presentation. German copyright law distinguishes protected creative work and adaptations, including the need for sufficient distance from another work; see [UrhG section 2](https://www.gesetze-im-internet.de/urhg/__2.html) and [UrhG section 23](https://www.gesetze-im-internet.de/urhg/__23.html).
