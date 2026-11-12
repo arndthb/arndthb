@@ -62,7 +62,7 @@ SECTIONS=[
 def build(mobile=False):
     w=420 if mobile else 1000
     x=48 if mobile else 105; right=w-(18 if mobile else 20); cw=right-x
-    size=18 if mobile else 22; line=27 if mobile else 32
+    size=20 if mobile else 22; line=30 if mobile else 32
     out=[]
     def rect(a,b,c,d,col,rx=0):out.append(f'<rect x="{a}" y="{b}" width="{c}" height="{d}"'+(f' rx="{rx}"' if rx else '')+f' fill="{col}"/>')
     def path(d,col):out.append(f'<path d="{d}" fill="{col}"/>')
@@ -118,7 +118,7 @@ def build(mobile=False):
             elif kind=='note':
                 rect(x,y-4,cw,1,c);y+=25
                 text(entry[1],x,y,13 if mobile else 16,c,'bold');y+=25
-                y=lines(entry[2],y,17 if mobile else 21,GOLD);y+=8
+                y=lines(entry[2],y,20 if mobile else 21,GOLD);y+=8
         bottom=y+5
         # Segment the left column, as on a TNG terminal, leaving black breaks.
         first=top+(47 if mobile else 78);height=bottom-first
