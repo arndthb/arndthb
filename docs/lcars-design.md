@@ -50,3 +50,5 @@ The interior toggle sections the upper hull at deck level and reveals two flight
 Five English callouts identify the flight consoles, pilot seats, passenger bench, equipment bay and aft hatch. Projected anchors follow the model during orbit and zoom. Slow travelling segments move along the leader lines; reduced motion keeps the lines static. Compact viewports show the selected callout, with system buttons and a live description below the viewport. Desktop displays all five callouts. Both the text boxes and their leader anchors follow each part through orbit and zoom; screen bounds and spacing prevent clipped or overlapping labels.
 
 Drive glazing uses normals relative to its own pod centre, including the inboard face. Back facing glazing and its highlight lines are culled so the solid upper housing remains opaque.
+
+Callouts now clear the projected hull bounds by 28 pixels on desktop. Compact annotations sit above the hull where space permits. Label positions still follow the projected craft during orbit and zoom.
