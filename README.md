@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/74af5055e9b58e2140b68dcc57fe98275cff0cd5/assets/lcars-starship-mobile.svg">
-  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/74af5055e9b58e2140b68dcc57fe98275cff0cd5/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s exploration terminal. An independently designed research shuttle with a faceted cabin, broad cockpit glazing and twin blue propulsion pods. A visible star field surrounds the craft. Status lights pulse gently across several systems, with support for reduced motion.">
+  <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/56f7e0e22c0bc7a6e11fc86c5b4d4e5e7705b2ad/assets/lcars-starship-mobile.svg">
+  <img align="top" src="https://raw.githubusercontent.com/arndthb/arndthb/56f7e0e22c0bc7a6e11fc86c5b4d4e5e7705b2ad/assets/lcars-starship.svg" width="1000" alt="Arndt Bohrenkämper’s exploration terminal. An independently designed research shuttle with a sculpted metallic hull, reflective cockpit glazing and recessed blue propulsion channels. A visible star field surrounds the craft. Status lights pulse gently across several systems, with support for reduced motion.">
 </picture>
 <picture>
   <source media="(max-width: 900px)" srcset="https://raw.githubusercontent.com/arndthb/arndthb/702708a2f7ad8f8e9c82d3b44d8b230d5962a8f0/assets/lcars-logbook-mobile.svg">
